@@ -30,12 +30,40 @@
         </div> -->
 
         <div id="app">
-            <p>{{items[0].name}}: {{items[0].price}} × {{items[0].quantity}}</p>
-            <!-- {{a | b}} aにbというフィルターをかけて表示する -->
+            <!-- <p>{{items[0].name}}: {{items[0].price}} × {{items[0].quantity}}</p>
+
+            {{a | b}} aにbというフィルターをかけて表示する
+
             <p>小計: {{ totalPrice | numberWithDelimiter}}円</p>
-            <p>合計（税込）: {{ totalPriceWithTax | numberWithDelimiter }}</p>
+            <p>合計（税込）: {{ totalPriceWithTax | numberWithDelimiter }}</p> -->
         </div>
 
-        <script src="chapter2/app.js"></script>
+        <div id="app2">
+            <ul>
+                <li v-for="item in items2" :key="item.name">{{item.name}}の個数: <input type="number" v-model="item.quantity" min="0" /></li>
+            </ul>
+            <hr />
+            <div :style="errorMessageStyle">
+                <ul>
+                    <li v-for="item in items2" :key="item.name">
+                        {{item.name}}: {{item.price}} × {{item.quantity}} = {{item.price * item.quantity | numberWithDelimiter}}円
+                    </li>
+                </ul>
+                <p>{{items2[0].name}}: {{items2[0].price}} × {{items2[0].quantity}}</p>
+                <p>小計: {{totalPrice | numberWithDelimiter}}円</p>
+                <p>合計（税込）: {{totalPriceWithTax | numberWithDelimiter}}</p>
+                <p v-show="!canBuy">{{1000 | numberWithDelimiter}}円以上からご購入いただけます</p>
+
+                <button :disabled="!canBuy" @click="doBuy">購入</button>
+            </div>
+        </div>
+
+        <div id="lifeSycle">
+            <p>{{count}}</p>
+        </div>
+
+        <script src="app.js"></script>
+        <script src="2.9.js"></script>
+        <script src="lifeSycle.js"></script>
     </body>
 </html>
